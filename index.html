@@ -1,10 +1,150 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>T Cheung</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="T Cheung — designer and developer creating thoughtful digital experiences.">
+  <meta name="theme-color" content="#f1efe8">
+  <title>T Cheung — Designer & Developer</title>
+  <style>
+    :root { --ink:#171714; --paper:#f1efe8; --acid:#c7f36b; --orange:#ff6b35; --blue:#4263eb; --line:rgba(23,23,20,.22); --pad:clamp(1.25rem,4vw,4.5rem); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:1.4; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    ::selection { background:var(--ink); color:var(--acid); }
+    .skip-link { position:fixed; top:-4rem; left:1rem; z-index:100; padding:.75rem 1rem; color:var(--paper); background:var(--ink); transition:top .2s ease; }
+    .skip-link:focus { top:1rem; }
+    .noise { position:fixed; inset:0; z-index:20; pointer-events:none; opacity:.045; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
+    .nav { position:relative; z-index:10; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:1.35rem var(--pad); border-bottom:1px solid var(--line); }
+    .brand { font-size:.9rem; font-weight:800; letter-spacing:-.02em; }
+    .nav-links { display:flex; gap:1.75rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; }
+    .nav-links a,.contact-link { position:relative; }
+    .nav-links a::after,.contact-link::after { content:""; position:absolute; right:0; bottom:-.25rem; left:0; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .25s ease; }
+    .nav-links a:hover::after,.contact-link:hover::after { transform:scaleX(1); transform-origin:left; }
+    .status { justify-self:end; display:flex; align-items:center; gap:.55rem; font-size:.75rem; }
+    .status-dot { width:.55rem; height:.55rem; border-radius:50%; background:#35a853; box-shadow:0 0 0 .3rem rgba(53,168,83,.12); }
+    .hero { min-height:calc(100vh - 66px); display:flex; flex-direction:column; justify-content:space-between; padding:clamp(3rem,7vw,7rem) var(--pad) 1.6rem; }
+    .hero-kicker { display:flex; align-items:center; gap:1rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; }
+    .hero-kicker::before { content:""; width:3rem; height:1px; background:var(--ink); }
+    .hero-title { margin:1.2rem 0 2.5rem; max-width:12ch; font-size:clamp(4.2rem,11.8vw,11.5rem); font-weight:900; line-height:.78; letter-spacing:-.085em; text-transform:uppercase; }
+    .hero-title .outline { color:transparent; -webkit-text-stroke:max(1px,.012em) var(--ink); }
+    .hero-bottom { display:grid; grid-template-columns:1fr minmax(16rem,28rem) auto; align-items:end; gap:2rem; }
+    .scroll-note { font-size:.69rem; letter-spacing:.1em; text-transform:uppercase; writing-mode:vertical-rl; transform:rotate(180deg); }
+    .intro { margin:0; font-size:clamp(1.15rem,2vw,1.75rem); line-height:1.25; letter-spacing:-.03em; }
+    .hero-index { justify-self:end; font-size:clamp(2.5rem,5vw,5rem); font-weight:900; letter-spacing:-.07em; line-height:.75; color:var(--orange); }
+    .ticker { overflow:hidden; color:var(--paper); background:var(--ink); border-block:1px solid var(--ink); }
+    .ticker-track { display:flex; width:max-content; padding:.85rem 0; animation:ticker 24s linear infinite; }
+    .ticker span { display:flex; align-items:center; gap:1.75rem; padding-right:1.75rem; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; }
+    .ticker span::after { content:"✦"; color:var(--acid); }
+    @keyframes ticker { to { transform:translateX(-50%); } }
+    .section { padding:clamp(5rem,10vw,10rem) var(--pad); }
+    .section-head { display:grid; grid-template-columns:1fr 2fr; gap:2rem; align-items:start; margin-bottom:clamp(3rem,7vw,6rem); }
+    .eyebrow { margin:.35rem 0 0; font-size:.7rem; text-transform:uppercase; letter-spacing:.13em; }
+    .section-title { margin:0; max-width:13ch; font-size:clamp(2.7rem,6vw,6.2rem); line-height:.9; letter-spacing:-.065em; }
+    .project-list { border-top:1px solid var(--line); }
+    .project { position:relative; display:grid; grid-template-columns:5rem 1fr auto; align-items:center; gap:2rem; min-height:9rem; padding:1.5rem 0; border-bottom:1px solid var(--line); overflow:hidden; transition:padding .35s ease,color .35s ease; }
+    .project::before { content:""; position:absolute; inset:0; z-index:-1; background:var(--ink); transform:translateY(102%); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .project:hover { color:var(--paper); padding-inline:1.5rem; }
+    .project:hover::before { transform:translateY(0); }
+    .project-number { font-size:.7rem; letter-spacing:.12em; }
+    .project h3 { margin:0 0 .35rem; font-size:clamp(1.75rem,4vw,4rem); letter-spacing:-.055em; line-height:1; }
+    .project p { margin:0; opacity:.68; font-size:.82rem; }
+    .project-arrow { width:clamp(3rem,5vw,5rem); aspect-ratio:1; display:grid; place-items:center; border:1px solid currentColor; border-radius:50%; font-size:1.5rem; transition:transform .3s ease,background .3s ease,color .3s ease; }
+    .project:hover .project-arrow { transform:rotate(-45deg); color:var(--ink); background:var(--acid); }
+    .services { color:var(--paper); background:var(--ink); }
+    .services .section-head { border-bottom:1px solid rgba(241,239,232,.25); padding-bottom:3rem; }
+    .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(241,239,232,.2); border:1px solid rgba(241,239,232,.2); }
+    .service { min-height:22rem; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1.5rem,3vw,2.75rem); background:var(--ink); transition:background .3s ease,color .3s ease; }
+    .service:hover { color:var(--ink); background:var(--acid); }
+    .service-top { display:flex; justify-content:space-between; font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; }
+    .service h3 { margin:0 0 1rem; font-size:clamp(2rem,3vw,3.4rem); line-height:.95; letter-spacing:-.055em; }
+    .service p { margin:0; max-width:28ch; opacity:.7; }
+    .about { display:grid; grid-template-columns:.85fr 1.15fr; min-height:80vh; padding:0; border-bottom:1px solid var(--line); }
+    .portrait { position:relative; min-height:36rem; overflow:hidden; background:var(--blue); }
+    .portrait-shape { position:absolute; }
+    .shape-a { width:60%; aspect-ratio:1; top:13%; left:20%; background:var(--acid); border-radius:50%; }
+    .shape-b { width:42%; height:65%; bottom:-5%; left:29%; background:var(--orange); border-radius:10rem 10rem 0 0; mix-blend-mode:multiply; }
+    .shape-c { width:22%; aspect-ratio:1; top:8%; right:9%; border:2px solid var(--paper); transform:rotate(18deg); }
+    .portrait-label { position:absolute; right:1.5rem; bottom:1.5rem; color:var(--paper); font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; }
+    .about-copy { display:flex; flex-direction:column; justify-content:space-between; gap:4rem; padding:clamp(3rem,7vw,7rem) var(--pad); }
+    .about-copy h2 { margin:0; max-width:10ch; font-size:clamp(3rem,6.5vw,7rem); line-height:.86; letter-spacing:-.07em; }
+    .about-text { max-width:35rem; align-self:flex-end; }
+    .about-text p { margin:0 0 1.25rem; font-size:clamp(1.05rem,1.5vw,1.35rem); }
+    .tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem; }
+    .tag { padding:.55rem .85rem; border:1px solid var(--line); border-radius:5rem; font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; }
+    .contact { position:relative; min-height:90vh; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(5rem,9vw,9rem) var(--pad) 2rem; overflow:hidden; }
+    .contact::after { content:""; position:absolute; right:-10vw; bottom:-18vw; width:45vw; aspect-ratio:1; border-radius:50%; background:var(--acid); z-index:-1; }
+    .contact-kicker { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; }
+    .contact h2 { margin:1.5rem 0 3rem; max-width:10ch; font-size:clamp(4rem,11vw,11rem); line-height:.79; letter-spacing:-.085em; text-transform:uppercase; }
+    .contact-link { display:inline-block; font-size:clamp(1.2rem,2vw,2rem); }
+    .footer { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; padding-top:5rem; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+    .footer-links { display:flex; gap:1.5rem; }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .8s ease,transform .8s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    @media (max-width:800px) {
+      .nav { grid-template-columns:1fr auto; } .nav-links { display:none; } .hero { min-height:88svh; }
+      .hero-title { font-size:clamp(3.7rem,18vw,7.5rem); } .hero-bottom { grid-template-columns:1fr auto; }
+      .scroll-note { display:none; } .intro { max-width:24ch; } .section-head { grid-template-columns:1fr; }
+      .project { grid-template-columns:2rem 1fr auto; gap:1rem; } .project p { max-width:26ch; }
+      .service-grid { grid-template-columns:1fr; } .service { min-height:16rem; }
+      .about { grid-template-columns:1fr; } .portrait { min-height:70vw; } .about-copy { min-height:65vh; }
+    }
+    @media (max-width:520px) {
+      .status span:last-child { display:none; } .hero-bottom { grid-template-columns:1fr; } .hero-index { justify-self:start; }
+      .project { grid-template-columns:1.5rem 1fr; min-height:8rem; } .project-arrow { display:none; }
+      .footer { align-items:flex-start; flex-direction:column; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, I'm T Cheung</h1>
-  <p>Welcome to my personal website.</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="T Cheung, home">TC®</a>
+    <nav class="nav-links" aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <div class="status"><span class="status-dot"></span><span>Available for opportunities</span></div>
+  </header>
+  <main id="main">
+    <section class="hero" id="top">
+      <div><div class="hero-kicker">Portfolio / 2026</div><h1 class="hero-title">T <span class="outline">Cheung</span></h1></div>
+      <div class="hero-bottom"><span class="scroll-note">Scroll to explore</span><p class="intro">A designer and developer crafting clear, characterful digital experiences from first idea to final interaction.</p><span class="hero-index" aria-hidden="true">01</span></div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Design direction</span><span>Creative development</span><span>Digital experiences</span><span>Thoughtful details</span><span>Design direction</span><span>Creative development</span><span>Digital experiences</span><span>Thoughtful details</span></div></div>
+    <section class="section" id="work">
+      <header class="section-head reveal"><p class="eyebrow">01 / Selected work</p><h2 class="section-title">A few things I’ve made.</h2></header>
+      <div class="project-list">
+        <a class="project reveal" href="#contact" aria-label="Discuss a product design project"><span class="project-number">01</span><div><h3>Digital Product</h3><p>Product design · UX strategy · Development</p></div><span class="project-arrow" aria-hidden="true">↗</span></a>
+        <a class="project reveal" href="#contact" aria-label="Discuss a brand identity project"><span class="project-number">02</span><div><h3>Brand Identity</h3><p>Creative direction · Visual identity · Systems</p></div><span class="project-arrow" aria-hidden="true">↗</span></a>
+        <a class="project reveal" href="#contact" aria-label="Discuss an interactive experience project"><span class="project-number">03</span><div><h3>Interactive Experience</h3><p>Art direction · Motion · Front-end</p></div><span class="project-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="section services" aria-labelledby="services-title">
+      <header class="section-head reveal"><p class="eyebrow">02 / What I do</p><h2 class="section-title" id="services-title">Ideas with intent, built to work.</h2></header>
+      <div class="service-grid">
+        <article class="service reveal"><div class="service-top"><span>Direction</span><span>01</span></div><div><h3>Think</h3><p>Finding the sharp idea, useful strategy, and distinct point of view behind the work.</p></div></article>
+        <article class="service reveal"><div class="service-top"><span>Design</span><span>02</span></div><div><h3>Shape</h3><p>Turning complexity into intuitive systems, expressive interfaces, and memorable moments.</p></div></article>
+        <article class="service reveal"><div class="service-top"><span>Development</span><span>03</span></div><div><h3>Build</h3><p>Bringing ideas to life with responsive, accessible, and thoughtfully crafted code.</p></div></article>
+      </div>
+    </section>
+    <section class="about" id="about">
+      <div class="portrait" aria-label="Abstract portrait composition"><span class="portrait-shape shape-a"></span><span class="portrait-shape shape-b"></span><span class="portrait-shape shape-c"></span><span class="portrait-label">Based in the UK · Working worldwide</span></div>
+      <div class="about-copy"><div><p class="eyebrow">03 / About</p><h2 class="reveal">Curious by nature. Precise by choice.</h2></div><div class="about-text reveal"><p>I’m T Cheung, a multidisciplinary creative interested in where design, technology, and culture overlap.</p><p>I care about strong ideas, simple systems, and the tiny details that make an experience feel just right.</p><div class="tags" aria-label="Skills"><span class="tag">Art direction</span><span class="tag">UI / UX</span><span class="tag">Front-end</span><span class="tag">Prototyping</span></div></div></div>
+    </section>
+    <section class="contact" id="contact">
+      <div class="reveal"><p class="contact-kicker">Have a project in mind?</p><h2>Let’s make it real.</h2><a class="contact-link" href="mailto:hello@example.com">hello@example.com ↗</a></div>
+      <footer class="footer"><span>© <span id="year">2026</span> T Cheung</span><div class="footer-links"><a href="#top">Back to top ↑</a><a href="mailto:hello@example.com">Email</a></div><span>Designed with intent</span></footer>
+    </section>
+  </main>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const revealObserver = new IntersectionObserver((entries) => { entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } }); }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+  </script>
 </body>
 </html>
